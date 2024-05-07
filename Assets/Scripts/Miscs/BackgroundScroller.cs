@@ -13,8 +13,16 @@ public class BackgroundScroller : MonoBehaviour
     {
         material = GetComponent<Renderer>().material;
     }
+    IEnumerator Start()
+    {
+        while(GameManager.GameState!=GameState.GameOver)
+        {
+            material.mainTextureOffset += scrollVelocity * Time.deltaTime;
+            yield return null;
+        }
+    }
     private void Update()
     {
-        material.mainTextureOffset += scrollVelocity * Time.deltaTime;
+      
     }
 }

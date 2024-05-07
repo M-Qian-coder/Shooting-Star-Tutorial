@@ -1,31 +1,32 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-///<summary>
-///
-///</summary>
 public class AutoDeactivate : MonoBehaviour
 {
-    [SerializeField]float lifetime=3f;
-    [SerializeField]bool destroyGameobject;
+    [SerializeField] bool destroyGameObject;
+    [SerializeField] float lifetime = 3f;
+
     WaitForSeconds waitLifetime;
+
     void Awake()
     {
-        waitLifetime = new WaitForSeconds(lifetime);    
+        waitLifetime = new WaitForSeconds(lifetime);
     }
-     void OnEnable()
+
+    void OnEnable()
     {
-        StartCoroutine(DeactiveCoroutine()); 
+        StartCoroutine(DeactivateCoroutine());
     }
-    IEnumerator DeactiveCoroutine()
+
+    IEnumerator DeactivateCoroutine()
     {
         yield return waitLifetime;
-        if(destroyGameobject)
+
+        if (destroyGameObject)
         {
             Destroy(gameObject);
         }
-        else
+        else 
         {
             gameObject.SetActive(false);
         }
